@@ -5,8 +5,8 @@ const container = document.getElementById("grid-container");
 const gridButton = document.querySelector(".grid-button");
 const breakTag = document.createElement("br");
 
-for (let i = 0; i < 16; i++) {
-  for (let i = 0; i < 16; i++) {
+for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 30; i++) {
     container.appendChild(squareDiv.cloneNode(true));
   }
   for (let i = 0; i < 1; i++) {
@@ -14,20 +14,61 @@ for (let i = 0; i < 16; i++) {
   }
 }
 
-/*setInterval(() => {
-  let breaktags = document.querySelectorAll("br");
-  console.log(container.children.length - breaktags.length);
-}, 1000);*/
+function generateRandomColor() {
+  const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
 
-let squareArray = document.querySelectorAll(".square-div");
-for (let i = 0; i < squareArray.length; i++) {
-  squareArray[i].addEventListener("mouseenter", function (event) {
-    event.target.style.backgroundColor = "red";
-  });
-  squareArray[i].addEventListener("mouseleave", function (event) {
-    event.target.style.backgroundColor = "blue";
-  });
+  let hexColor = "#";
+
+  for (let i = 0; i < 6; i++) {
+    hexColor += hex[getRandomNumber()];
+  }
+
+  function getRandomNumber() {
+    return Math.floor(Math.random() * hex.length);
+  }
+  return hexColor;
 }
+
+function getRandomNum() {
+  return Math.floor(Math.random() * 256);
+}
+
+/*
+function setBackgroundColor() {
+  let allOfEm = document.querySelectorAll(".square-div");
+  for (let a = 0; a < allOfEm.length; a++) {
+    allOfEm[a].style.backgroundColor = generateRandomColor();
+  }
+}
+
+setBackgroundColor(); 
+*/
+
+function backgroundColorChange() {
+  let squareArray = document.querySelectorAll(".square-div");
+  //let j = 1;
+  for (let i = 0; i < squareArray.length; i++) {
+    squareArray[i].addEventListener("mouseenter", function (event) {
+      event.target.style.backgroundColor = generateRandomColor();
+    });
+    squareArray[i].addEventListener("mouseleave", function (event) {
+      event.target.style.backgroundColor = generateRandomColor();
+    });
+  }
+}
+
+backgroundColorChange();
+
+let globalLength = container.children.length;
+
+setInterval(() => {
+  let length = container.children.length;
+  if (length !== globalLength) {
+    backgroundColorChange();
+    //setBackgroundColor();
+    globalLength = length;
+  }
+}, 1000);
 
 gridButton.addEventListener("click", function () {
   const allSquareDiv = document.querySelectorAll(".square-div");
