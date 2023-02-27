@@ -33,16 +33,14 @@ function getRandomNum() {
   return Math.floor(Math.random() * 256);
 }
 
-/*
 function setBackgroundColor() {
   let allOfEm = document.querySelectorAll(".square-div");
   for (let a = 0; a < allOfEm.length; a++) {
-    allOfEm[a].style.backgroundColor = generateRandomColor();
+    allOfEm[a].style.backgroundColor = "";
   }
 }
 
-setBackgroundColor(); 
-*/
+setBackgroundColor();
 
 function backgroundColorChange() {
   let squareArray = document.querySelectorAll(".square-div");
